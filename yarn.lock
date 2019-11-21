@@ -18,8 +18,10 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
-"@nukisman/utils@file:../utils":
+"@nukisman/utils@^0.0.1":
   version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@nukisman/utils/-/utils-0.0.1.tgz#4c7d8e43161aebb60c999161f813a6164189cd5d"
+  integrity sha512-MhwKPJUzvSsPwT6lyDcof4zywIb8RZDKK0VcE4wwrX5zeBwFSwpbXPyRBWIhoJn2ozQf+BNLyCqnDFJQlINR+Q==
 
 "@types/eslint-visitor-keys@^1.0.0":
   version "1.0.0"
