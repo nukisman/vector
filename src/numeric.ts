@@ -47,6 +47,10 @@ export const mult = (k: number, v: V2<number>): V2<number> => [
   v[1] * k
 ];
 export const neg = (v: V2<number>): V2<number> => mult(-1, v);
+export const divide = (k: number, v: V2<number>): V2<number> => [
+  k / v[0],
+  k / v[1]
+];
 
 /** Скалярное произведение 2D-векторов */
 export const dotProduct2 = (a: V2<number>, b: V2<number>): number =>
