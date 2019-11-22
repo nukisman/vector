@@ -34,27 +34,39 @@ export const identity3: M3<number> = [
   [0, 0, 1]
 ];
 
+export const sum = (a: Point2, b: Point2, ...rest: Point2[]): Point2 =>
+  rest.reduce(add, add(a, b));
+export const prod = (a: Point2, b: Point2, ...rest: Point2[]): Point2 =>
+  rest.reduce(mult, mult(a, b));
+
 export const add = (a: Point2, b: Point2): Point2 => [a[0] + b[0], a[1] + b[1]];
 export const sub = (a: Point2, b: Point2): Point2 => [a[0] - b[0], a[1] - b[1]];
-export const mult = (k: number, v: Point2): Point2 => [v[0] * k, v[1] * k];
-export const neg = (v: Point2): Point2 => mult(-1, v);
-export const divide = (k: number, v: Point2): Point2 => [k / v[0], k / v[1]];
+export const mult = (a: Point2, b: Point2): Point2 => [
+  a[0] * b[0],
+  a[1] * b[1]
+];
+export const multBy = (v: Point2, k: number): Point2 => [v[0] * k, v[1] * k];
+export const neg = (v: Point2): Point2 => multBy(v, -1);
 
-/** Скалярное произведение 2D-векторов */
-export const dotProduct2 = (a: Point2, b: Point2): number =>
-  a[0] * b[0] + a[1] * b[1];
-/** Скалярное произведение 3D-векторов */
-export const dotProduct3 = (a: Point3, b: Point3): number =>
-  a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+export const divide = (a: Point2, b: Point2): Point2 => [
+  a[0] / b[0],
+  a[1] / b[1]
+];
+export const divideHomo = (k: number, v: Point2): Point2 => divide([k, k], v);
+export const divideBy = (v: Point2, k: number): Point2 => divide(v, [k, k]);
 
-export const product3 = (a: M3<number>, b: M3<number>): M3<number> => {
+/** Скалярное произведение */
+export const dotProduct = <T extends number[]>(a: T, b: T): number =>
+  a.reduce((acc, ai, i) => acc + ai * b[i], 0);
+
+export const productM3 = (a: M3<number>, b: M3<number>): M3<number> => {
   const b_: M3<number> = flip(b);
-  return map(a, (item, i, k) => dotProduct3(a[i], b_[k]));
+  return map(a, (item, i, k) => dotProduct(a[i], b_[k]));
 };
 
 //todo: productLine(line, m)
 export const productColumn3 = (m: M3<number>, column: Point3): Point3 => [
-  dotProduct3(m[0], column),
-  dotProduct3(m[1], column),
-  dotProduct3(m[2], column)
+  dotProduct(m[0], column),
+  dotProduct(m[1], column),
+  dotProduct(m[2], column)
 ];

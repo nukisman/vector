@@ -1,7 +1,7 @@
 import { V2, M3, V3, columnPadLengths, showLine, showM3 } from './generic';
 import {
   productColumn3,
-  product3,
+  productM3,
   showPoint,
   Point2,
   showFixed_,
@@ -20,7 +20,7 @@ export const transform = (op: M3<number>, v: V2<number>): V2<number> => {
 
 export const compose = (op: M3<number>, ...ops: M3<number>[]): M3<number> =>
   spy(
-    ops.reduce((acc, t) => product3(acc, t), op),
+    ops.reduce((acc, t) => productM3(acc, t), op),
     res => ['compose\n' + showCompose([op, ...ops], res)]
   );
 
